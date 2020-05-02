@@ -1,3 +1,5 @@
+
+
 ## 02类加载子系统
 
 ![image-20200430152256052](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200430152256052.png)
@@ -111,9 +113,9 @@
 
 可以赋值，若前面没有声明不能引用
 
-因为变量在准备阶段就已经被分配到方法区中，此时具有零值（默认值），赋与类变量值是在初始化阶段，在准备所属的链接阶段之后
+**因为变量在准备阶段就已经被分配到方法区中，此时具有零值（默认值），赋与类变量值是在初始化阶段，在准备所属的链接阶段之后**
 
-[Java前向引用](https://www.cnblogs.com/nokiaguy/p/3156357.html)
+[Java前向引用]: https://www.cnblogs.com/nokiaguy/p/3156357.html
 
 若没有类变量与静态代码块，则不会存在<clinit>
 
@@ -146,7 +148,7 @@
 
 ![image-20200430231135242](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200430231135242.png)
 
-Extention Class Loader 与 System Class Loader都间接继承了ClassLoader，所以他们也被称为自定义加载器
+**Extention Class Loader 与 System Class Loader都间接继承了ClassLoader，所以他们也被称为自定义加载器**
 
 ![image-20200430231203583](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200430231203583.png)
 
@@ -168,5 +170,282 @@ public ClassLoader getClassLoader() {
 
 ![image-20200501000100707](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501000100707.png)
 
-[关于类加载器的双亲委派模型](https://blog.csdn.net/javazejian/article/details/73413292)
+[关于类加载器的双亲委派模型]: https://blog.csdn.net/javazejian/article/details/73413292
+
+
+
+#### 虚拟机自带的加载器
+
+**启动类加载器(引导类加载器，Bootstrap ClassLoader)**
+➢这个类加载使用**C/C++语言实现**的，嵌套在JVM内部（即JVM的一部分）。
+➢它用来加载Java的核心库(JAVA HOME/jre/lib/rt. jar、resources.jar或sun . boot.class .path路径下的内容) ,用于提供JVM自身需要的类
+➢并不继承自java. lang.ClassLoader,没有父加载器。
+➢加载扩展类和应用程序类加载器，并指定为他们的父类加载器。
+➢出于安全考虑，Bootstrap启动类加载器只加载包名为java、javax、sun等开头的类
+
+**扩展类加载器( Extension ClassLoader)**
+➢**Java语言编写**，由sun . misc. Launcher$ExtClassLoader实现(Launcher的一个内部类，代码有体现)。
+➢派生于ClassLoader类
+➢父类加载器为启动类加载器:
+➢从java.ext. dirs系统属性所指定的目录中加载类库，或从JDK的安装目录的jre/lib/ext子目录(扩展目录)下加载类库。**如果用户创建的JAR放在此目录下，也会自动由扩展类加载器加载。**
+
+<u>Extension ClassLoader为Launcher的一个内部类</u>
+
+![image-20200501230138066](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501230138066.png)
+
+**应用程序类加载器(系统类加载器，AppClassLoader )**
+➢java语言编写，由sun. misc. Launcher$AppClassLoader实现
+➢派生于ClassLoader类
+➢父类加载器为扩展类加载器
+➢它负责加载环境变量classpath或系统属性java.class.path 指定路径下的类库
+➢**该类加载是程序中默认的类加载器**，一般来说，Java应用的类都是由它来完成加载
+➢通过ClassLoader#getSystemClassLoader ()方法可以获取到该类加载器
+
+![image-20200501230540170](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501230540170.png)
+
+**ClassLoader1**
+
+![image-20200501231701249](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501231701249.png)
+
+结果： 
+
+[rt.jar的作用]: https://blog.csdn.net/u011305680/article/details/80380532
+
+![image-20200501231734513](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501231734513.png)
+
+![image-20200501232806861](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501232806861.png)
+
+同理：
+
+![image-20200501234742495](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200501234742495.png)
+
+**用户自定义类加载器**
+●在Java的日常应用程序开发中，类的加载几乎是由上述3种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器，来定制类的加载方式。
+●为什么要自定义类加载器?
+➢隔离加载类
+➢修改类加载的方式
+➢扩展加载源
+➢防止源码泄漏
+
+**隔离加载类**
+
+由于中间件都有自己的依赖的大包，然后在同一个工程里边如果引入多个框架的话有可能会出现比如某些类路径一样、类型也相同，那在这种情况下呢就会出类的冲突，我们就需要做一个类的仲裁。像主流的容器类的框架，他们都会自定义这个类加载器。
+
+**修改类加载方式**
+
+在整个类的加载中，bootstrap是一定会使用的，因为他一定会加载系统核心的api。其他类可能就是不是必须的，在实际情况中，可以在要用的时候再引入。在需要的时候进行一个动态的加载。
+
+**扩展加载源**
+
+除了前面提到了加载的类可以比如有本地的物理磁盘，通过网络中，通过jar包中等等去加载之外，还可以考虑像比如说数据库当中，甚至说这个电视机的机顶盒等等，我们去加载这个字节码文件的来源，所以通过自定义类加载器，可以来扩展加载来源。
+
+**防止源码泄漏**
+
+Java代码实际上是很容易被编译和篡改的，有了这个字节码文件以后，没有这个反编译的一些手段的话很容易的就被反编译了，容易被篡改。为了防止被编译和篡改，对这个字节码文件来进行加密，你自己在运行的时候把它再还原成内存中的这个类去执行的时候，我们需要解密，那这个时候呢，我们可以去自定义类加载器去实现这样的一个解密操作。
+
+**用户自定义类加载器实现步骤:**
+1.开发人员可以通过继承抽象类java. lang. ClassLoader类的方式， 实现自己的类加载器，以满足一些特殊的需求
+
+2.在JDK1.2之前， 在自定义类加载器时，总会去继承ClassLoader类并重写loadClass()方法，从而实现自定义的类加载类，但是在JDK1.2之后已不再建议用户去覆盖loadClass()方法，而是建议把自定义的类加载逻辑写在findClass()方法中
+
+3.在编写自定义类加载器时，如果没有太过于复杂的需求，可以直接继承URLClassLoader类，这样就可以避免自己去编写findClass()方法及其获取字节码流的方式<!--如没有一些解密操作-->使自定义类加载器编写更加简洁。
+
+```
+/**
+ * @author Aaron
+ * @description 自定义用户类加载器
+ * @date 2020/5/2 9:48 AM
+ */
+public class CustomClassLoader extends ClassLoader {
+
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        try {
+            //根据路径name,以二进制流的方式读到内存里面，形成一个字节数组
+            byte[] result = getClassFromCustomPath(name);
+            if (result == null) {
+                throw new FileNotFoundException(name);
+            } else {
+                // defineClass方法将字节码转化为类
+                return defineClass(name, result, 0, result.length);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        throw new ClassNotFoundException(name);
+    }
+
+    private byte[] getClassFromCustomPath(String name) {
+        // 从自定义路径中加载指定类，返回类的字节码文件
+        // 如果指定路径的字节码文件进行了加密，需要在此方法中解密操作
+        InputStream in = null;
+        ByteArrayOutputStream out = null;
+        String path = "/Users/john/" + name + ".class";
+        try {
+            in = new FileInputStream(path);
+            out = new ByteArrayOutputStream();
+            byte[] buffer = new byte[2048];
+            int len = 0;
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+            return out.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        CustomClassLoader customClassLoader = new CustomClassLoader();
+        try {
+            Class<?> clazz = Class.forName("One", true, customClassLoader);
+            Object obj = clazz.newInstance();
+            // cn.xpleaf.coding.c4.CustomClassLoader@610455d6
+            System.out.println(obj.getClass().getClassLoader());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+**ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自**
+**ClassLoader ( 不包括启动类加载器)**
+
+| 方法名称                                           | 描述                                                         |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| getParent()                                        | 返回该类加载器的超累加载器                                   |
+| loadClass(String name)                             | 加载名称为name的类，返回结果为java.lang.Class类的实例        |
+| findLoadedClass(String name)                       | 查找名称为name的已经被加载过的类，返回结果为java.lang.Class类的实例 |
+| defineClass(String name,byte[] b,int off, int len) | 把字节数组b中的内容转换为一个Java类，返回结果为java.lang.Class类的实例 |
+| resolveClass(Class<?> c)                           | 连接指定的一个Java类                                         |
+
+| 方式一：获取当前类的ClassLoader                |
+| ---------------------------------------------- |
+| class.getClassLoader()                         |
+| 方式二：获取当前线程上下文的ClassLoader        |
+| Thread.currentThread().getContextClassLoader() |
+| 方式三：获取系统的ClassLoader                  |
+| ClassLoader.getSystemClassLoader()             |
+| 方式四：获取调用者的ClassLoader                |
+| DriverManager.getCallerClassLoader()           |
+
+```
+public class ClassLoaderTest2 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        //1
+        ClassLoader classLoader = Class.forName("java.lang.String").getClassLoader();
+        System.out.println(classLoader); //null
+        //2 通过线程获取该上下文的一个加载器，上下文在自定义的这个程序当中
+        ClassLoader classLoader1 = Thread.currentThread().getContextClassLoader();
+        System.out.println(classLoader1); //sun.misc.Launcher$AppClassLoader@18b4aac2
+        //3
+        ClassLoader classLoader2 = ClassLoader.getSystemClassLoader().getParent();
+        System.out.println(classLoader2);//sun.misc.Launcher$ExtClassLoader@610455d6
+    }
+}
+```
+
+#### 双亲委派机制
+
+Java虛拟机对class文件采用的是**按需加载**的方式，也就是说当需要使用该
+类时才会将它的class文件加载到内存生成class对象。而且加载某个类的
+class文件时，Java虚拟机采用的是**双亲委派模式**，即把请求交由父类处理，
+它是-种任务委派模式。
+
+[静态代码块执行顺序]: https://blog.csdn.net/qq_35868412/article/details/89360250
+
+<!--静态代码块在第三个阶段（初始化）被调用，把静态代码块，静态变量显示赋值放在<clinit>中-->
+
+![image-20200502105349223](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502105349223.png)
+
+![image-20200502110226182](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502110226182.png)
+
+从结果来看不是执行的自定义实现的String。为了这种防止，引入双亲委派机制
+
+![image-20200502105501988](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502105501988.png)
+
+所以String不会由AppClassLoader加载,会由引导类加载器加载
+
+再举一个例子：
+
+![image-20200502110556907](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502110556907.png)
+
+1. 想要去执行main方法，则main方法所在的类需要被加载
+2. 为这个String,委托给BootstrapLoader。它就加载了核心API的java.lang中的String,但是没有main方法，所以报错
+
+**再举一个例子**
+
+他这个双亲委派针对于包名，类名相同的情况下，加如我设置包名不同（自己定义的类），它为AppClassLoader
+
+![image-20200502114100458](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502114100458.png)
+
+![image-20200502114130213](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502114130213.png)
+
+下面对以上流程作出一个解释：
+
+[首先介绍下什么是SPI]: https://blog.csdn.net/whp1473/article/details/80164254
+
+
+我们在程序中需要用到SPI接口，它属于这个核心API。那我们就使用双亲委派机制，**依次 **到引导类加载器，然后到引导类加载器去加载rt.jar。SPI的核心类就加载过来了。那么这里边会存在一些interface接口，那接口呢，需要用一些具体的实现类了，那具体实现类呢，这就涉及到一些第三方的jar包了，我们要加载的是JDBC的jar包，那我们要加载第三方的时候呢，这个时候因为你是第三方的不属于核心的API，其实就应该是由我们所谓的AppClassLoader加载，所以这就出现一个叫 **反向委派** ，一直这样委派就委派到AppClassLoader，这块儿实际上是由我们当前线程的，通过getContextClassLoader获取到的，然后由他来加载我们SPI接口的具体实现类，jdbc.jar包里边儿的这些API，所以这里边儿我们就会看到接口是由Bootstrap ClassLoader加载的，而具体接口的实现类，是第三方的,是由我们这个ContextClassLoader加载的，而ContextClassLoader呢，就是我们的AppClassLoader，在前边获取类加载器的时候，演示过通过线程来获取，一般情况下我们拿到的都是一个AppClassLoader去加载我们第三方的jdbc.jar包下的API，这是这个图想说明的。
+
+**双亲委派优势**
+➢避免类的重复加载 即加载有一个层次关系
+
+<!--如：BootstrapClassLoader->ExtClassLoader->AppClassLoader,上面有图-->
+➢保护程序安全，防止核心API被随意篡改
+	自定义类: java.1ang. String
+	自定义类: java. lang. ShkStart
+java. lang. SecurityException:Prohibited package name: java.lang
+
+举例：
+
+![image-20200502120549976](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200502120549976.png)
+
+阻止报名为java.lang包。我们按照双亲委派机制依次往上，Bootstrap ClassLoader发现为java开头,则发现为自己管的，它就去加载这个类。java.lang包的访问需要权限，**java.lang.SecurityException**,阻止我们用这个报名定义我们的自定义类。你可能会问这个跟之前String区别，我的理解是：因为存在这个机制，String本来就会在Bootstrap ClassLoader中加载成功，所以String不会影响。但是若Aaron加载成功（本来引导类加载器它自身没有这个东西），它可能就会怀疑是恶意的，会对它自己有影响。
+
+#### 在双亲委派机制中还有一个 “沙箱安全机制”。
+
+<!--在这只是介绍下这个名字，前面例子已说明-->
+
+自定义String类，但是在加载自定义String类的时候会率先使用引导类加载器加载，而引导类加载器在加载的过程中会先如载jdk自带的文件) (rt. jar包中java\lang\String. class)，报错信息说没有main方法,就是因为加载的是rt. jar包中的String类。这样可以保证对java核心源代码的保护，这就是**沙箱安全机制**。
+
+#### 其他补充内容
+
+●在JVM中表示两个class对象是否为同一个类存在两个必要条件:
+➢类的完整类名必须一致， 包括包名。<!--前面javapp.langpp.String已说明-->
+➢加载这个类的ClassLoader (指ClassLoader实例对象)必须相同。<!--例如自定义的为AppClassLoader,核心中的String为Bootstrap ClassLoader,前面例子也说明了,跟上一个例子相同-->
+●换句话说，在JVM中，即使这两个类对象(class对象)来源同一个Class文件，被同一个虚拟机所加载，但只要加载它们的ClassLoader实例对象不同，那么这两个类对象也是不相等的。
+
+#### **对类加载器的引用**
+
+JVM必须知道一个类型是由启动加载器加载的还是由用户类加载器加载的。如果一个类型是由用户类加载器加载的，**那么JVM会将这个类加载器的一个引用作为类型信息的一部分保存在方法区中**。当解析一个类型到另一个类型的引用的时候，JVM需要保证这两个类型的类加载器是相同的<!--后面学习到动态链接再解释-->。
+
+#### **类的主动使用和被动使用**
+
+Java程序对类的使用方式分为:主动使用和被动使用。
+●主动使用，又分为七种情况:
+➢创建类的实例
+➢访问某个类或接口的静态变量，或者对该静态变量赋值
+➢调用类的静态方法
+➢反射(比如: Class . forName ("top. p3wj. java.StringTest") ) 
+➢初始化一个类的子类 <!--它的父类也会被初始化-->
+➢Java虚拟机启动时被标明为启动类的类
+➢JDK 7开始提供的动态语言支持:
+java. lang. invoke . MethodHandle实例的解析结果REF_getStatic、 REF_putStatic、 REF_invokeStatic句柄对应的类没有初始化，则初始化
+●除了以上七种情况，其他使用Java 类的方式都被看作是对**类的被动使用**，都**不会导致类的初始化**。
+
+[什么是句柄]: https://blog.csdn.net/wyx0224/article/details/83385168
+
+解释：**（类的加载过程：加载->链接[验证、准备、解析]->初始化）**
+
+就是说当你要是被动使用的话会被加载，毕竟使用了，一旦使用了我们就需要加载到内存当中。但是呢，在初始化的时候不一定会去调用这个<clinit>方法，这个方法会涉及到静态的属性静态代码块的一个执行了，你要是静态的属性会有一个显示赋值，尤其是这个静态代码块是否执行要看是否执行过这个<clinit>，所以呢，主动使用被动使用的区别就在于这个操作是否执行了。<!--之后再做验证-->
 
