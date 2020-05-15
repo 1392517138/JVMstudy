@@ -7,7 +7,7 @@
 
  有不少Java开发人员一*提到Java内存结构，就会非常粗粒度地将JVM中的内存区理解为仅有Java堆(heap)和Java栈(stack)?为什么?
 
- ![image-20200503222159421](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200503222159421.png)
+ ![image-20200503222159421](../img/image-20200503222159421.png)
 
 堆，来解决数据的存储问题，主体的数据都在堆中放，当然也不是全部，对象呢主要是在堆中放的。**那如果你要是方法内的一些局部变量的话，是放在栈中，当然这变量是基本数据类型。引用数据类型的话呢，在栈空间只是放这个对象的一个引用只要是对象，都是在堆空间**。所以主体上数据都放在堆空间，栈空间它也是可以放一些数据的，局部变量的一些基本类型的数据或者引用的对象的一个地址，也是放在这个栈中。堆的大小可以设置，方法区因为是本地物理内存，最大，堆第二。
 
@@ -29,7 +29,7 @@ Java虚似机栈(Java Virtual Machine Stack) ，早期也叫Java栈。
 
 栈顶顶方法叫做当前方法
 
-![image-20200503235304345](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200503235304345.png)
+![image-20200503235304345](../img/image-20200503235304345.png)
 
 栈的特点(优点)
 ●栈是一种快速有效的分配存储方式，访问速度仅次于程序计数器。
@@ -40,7 +40,8 @@ Java虚似机栈(Java Virtual Machine Stack) ，早期也叫Java栈。
 
 ​	栈存在OOM，不存在GC （因为只有进栈出栈的操作）
 
- <!--程序计数器不存在GC,也不存在OOM，因为它只存一个地址-->
+程序计数器不存在GC,也不存在OOM，因为它只存一个地址
+
 
 
 
@@ -50,15 +51,15 @@ Java虚似机栈(Java Virtual Machine Stack) ，早期也叫Java栈。
 ➢如果采用固定大小的Java虚拟机栈，那每一个线程的Java虛拟机栈容量可以在线程创建的时候独立选定。如果**线程请求分配**的栈容量超过Java虚拟机栈允许的最大容量，Java 虚拟机将会抛出一个**StackOverflowError**异常。
 ➢如果Java虚拟机栈可以动态扩展，并且在尝试扩展的时候无法申请到足够的存，或者在创建新的**线程时没有足够的内存**去创建对应的虚拟机栈,那Java虚拟机将会抛出一个**OutofMemoryError**异常。
 
-![image-20200504150333959](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504150333959.png)
+![image-20200504150333959](../img/image-20200504150333959.png)
 
-![image-20200504151514630](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504151514630.png)
+![image-20200504151514630](../img/image-20200504151514630.png)
 
 **现改变栈大小**
 
-![image-20200504151606308](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504151606308.png)
+![image-20200504151606308](../img/image-20200504151606308.png)
 
-![image-20200504151646355](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504151646355.png)
+![image-20200504151646355](../img/image-20200504151646355.png)
 
 不同操作系统会有所不同
 
@@ -81,15 +82,15 @@ Java虚似机栈(Java Virtual Machine Stack) ，早期也叫Java栈。
 ●如果在该方法中调用了其他方法，对应的新的栈帧会被创建出来，放在栈的
 顶端，成为新的当前帧。
 
-![image-20200504152604388](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504152604388.png)
+![image-20200504152604388](../img/image-20200504152604388.png)
 
-![image-20200504153257163](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504153257163.png)
+![image-20200504153257163](../img/image-20200504153257163.png)
 
 **debug**来看一下
 
-![image-20200504153719238](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504153719238.png)
+![image-20200504153719238](../img/image-20200504153719238.png)
 
-![image-20200504153756045](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504153756045.png)
+![image-20200504153756045](../img/image-20200504153756045.png)
 
 ●不同线程 中所包含的栈帧是不允许存在相互引用的，即不可能在一个栈帧之，中引用另外一个线程的栈帧。
 
@@ -100,17 +101,17 @@ Java虚似机栈(Java Virtual Machine Stack) ，早期也叫Java栈。
 
 **例3抛2->1**
 
-![image-20200504162302607](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504162302607.png)
+![image-20200504162302607](../img/image-20200504162302607.png)
 
 由上可知method1跟main都是异常出错。没有进行捕获
 
 1. method1处捕获
 
-![image-20200504162509775](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504162509775.png)
+![image-20200504162509775](../img/image-20200504162509775.png)
 
 2.main处捕获
 
-![image-20200504162622521](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504162622521.png)
+![image-20200504162622521](../img/image-20200504162622521.png)
 
 此时main是以正常方式结束的，method1不是
 
@@ -125,7 +126,7 @@ public double method3(){
 }
 ```
 
-![image-20200504163138285](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504163138285.png)
+![image-20200504163138285](../img/image-20200504163138285.png)
 
 ```
 public int method2(){
@@ -137,7 +138,7 @@ public int method2(){
 }
 ```
 
-![image-20200504163224457](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504163224457.png)
+![image-20200504163224457](../img/image-20200504163224457.png)
 
 ```
     public void method1(){
@@ -148,7 +149,7 @@ public int method2(){
     }
 ```
 
-![image-20200504163334376](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504163334376.png)
+![image-20200504163334376](../img/image-20200504163334376.png)
 
 **栈帧的内部结构**
 
@@ -159,13 +160,13 @@ public int method2(){
 - 动态链接(Dynamic Linking) ( 或指向运行吋常量池的方法引用)
 - 方法返回地址(Return Address) (或方法正常退出或者异常退出的定义)一些附加信息
 
-![image-20200504163602435](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504163602435.png)
+![image-20200504163602435](../img/image-20200504163602435.png)
 
 栈帧的大小取决于内部结构的大小
 
 **多个线程时**
 
-![image-20200504164155498](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504164155498.png)
+![image-20200504164155498](../img/image-20200504164155498.png)
 
 **局部变量表**
 
@@ -178,25 +179,25 @@ public int method2(){
 
 Javap 相当于对字节码文件的一个解析
 
-![image-20200504175457396](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504175457396.png)
+![image-20200504175457396](../img/image-20200504175457396.png)
 
 
 
 字节码从上往下的一个格式
 
-![image-20200504180217390](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504180217390.png)
+![image-20200504180217390](../img/image-20200504180217390.png)
 
 **现在解释一下结构**
 
-![image-20200504180343502](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504180343502.png)
+![image-20200504180343502](../img/image-20200504180343502.png)
 
-![image-20200504180425176](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504180425176.png)
+![image-20200504180425176](../img/image-20200504180425176.png)
 
 Bytecode是字节码，与上图相对应
 
 Exception table异常表，没有就是空的
 
-![image-20200504182756997](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504182756997.png)
+![image-20200504182756997](../img/image-20200504182756997.png)
 
 Maximum local variables:最大局部变量表长度
 
@@ -226,7 +227,7 @@ Code length: 方法执行的一个长度(指的是字节码)
 
 现对**jclasslib**做一个说明
 
-![image-20200504183828335](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200504183828335.png)
+![image-20200504183828335](../img/image-20200504183828335.png)
 
 Name：名称
 
@@ -234,7 +235,7 @@ Descriptor:方法的参数。String类型的一维数组，V是void类型
 
 Access flags:访问标识
 
-![image-20200505130403574](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505130403574.png)
+![image-20200505130403574](../img/image-20200505130403574.png)
 
 **行号表**
 
@@ -244,19 +245,19 @@ Start PC 字节码指令的行号
 
 以Line Number=15为例
 
-![image-20200505130724263](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505130724263.png)
+![image-20200505130724263](../img/image-20200505130724263.png)
 
 **局部变量表**
 
 按照声明的先后顺序，依次生成局部变量表的索引位置
 
-![image-20200505131320315](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505131320315.png)
+![image-20200505131320315](../img/image-20200505131320315.png)
 
 Start PC，表明了该变量作用域的一个起始位置
 
 声明之后，作用域从下一行开始
 
-Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505132109624](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505132109624.png)
+Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505132109624](../img/image-20200505132109624.png)
 
 **代码长度**
 
@@ -272,27 +273,27 @@ Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505
 ➢byte、short 、char在存储前被转换为int，boolean 也被转换为int，0表示false ，非0表示true。
 ➢long 和double 则占据两个Slot。
 
-![image-20200505155314653](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505155314653.png)
+![image-20200505155314653](../img/image-20200505155314653.png)
 
 
 
-![image-20200505140623766](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505140623766.png)
+![image-20200505140623766](../img/image-20200505140623766.png)
 
-![image-20200505152852159](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505152852159.png)
+![image-20200505152852159](../img/image-20200505152852159.png)
 
-![image-20200505153027429](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505153027429.png)
+![image-20200505153027429](../img/image-20200505153027429.png)
 
 没有调用this局部变量表中也有
 
-![image-20200505160444020](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505160444020.png)
+![image-20200505160444020](../img/image-20200505160444020.png)
 
 静态代码块中不允许用this
 
 因为this不存在与当前局部变量表中
 
-![image-20200505155413440](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505155413440.png)
+![image-20200505155413440](../img/image-20200505155413440.png)
 
-![image-20200505160153910](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505160153910.png)
+![image-20200505160153910](../img/image-20200505160153910.png)
 
 **举例**：**静态变量与局部变量的对比**
 
@@ -310,9 +311,9 @@ Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505
 
 2、局部变量：在使用前，必须要进行显式赋值，否则编译不通过
 
-![image-20200505171307300](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505171307300.png)
+![image-20200505171307300](../img/image-20200505171307300.png)
 
-![image-20200505171417971](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505171417971.png)
+![image-20200505171417971](../img/image-20200505171417971.png)
 
 **补充说明**
 ●在栈帧中，与性能调优关系最为密切的部分就是前面提到的局部变量表。
@@ -322,15 +323,15 @@ Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505
 
 栈是管运行的
 
-![image-20200505171825245](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505171825245.png)
+![image-20200505171825245](../img/image-20200505171825245.png)
 
 局部变量表存储的数据需要load加载，sotre等都会影响到堆中的gc。对gc影响较大的就是栈中的局部变量表，
 
 ### 操作数栈
 
-![image-20200505212910500](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505212910500.png)
+![image-20200505212910500](../img/image-20200505212910500.png)
 
-![image-20200505213417076](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505213417076.png)
+![image-20200505213417076](../img/image-20200505213417076.png)
 
 -----------------------------------------------------
 ●操作数栈，**主要用于保存计算过程的中间结果，同时作为计算过程中变量**
@@ -350,7 +351,7 @@ Length是长度（偏移）。会发现0+16=8+8=11+5=16都是为![image-20200505
 ●操作数栈**并非采用访问索引的方式来进行数据访问**的，而是只能通过标准
 的入栈(push) 和出栈(pop)操作来完成一次数据访 问。
 
-![image-20200505234350008](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200505234350008.png)
+![image-20200505234350008](../img/image-20200505234350008.png)
 
 locals：局部变量表深度
 
@@ -365,27 +366,27 @@ stack: 操作数栈的深度
 
 ### 代码追踪
 
-![image-20200506193532547](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506193532547.png)
+![image-20200506193532547](../img/image-20200506193532547.png)
 
 **一**、
 
-![image-20200506193552131](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506193552131.png)
+![image-20200506193552131](../img/image-20200506193552131.png)
 
 **二**、
 
-![image-20200506194239748](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506194239748.png)
+![image-20200506194239748](../img/image-20200506194239748.png)
 
 **三**、
 
-![image-20200506194314212](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506194314212.png)
+![image-20200506194314212](../img/image-20200506194314212.png)
 
 **四**、
 
-![image-20200506194500372](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506194500372.png)
+![image-20200506194500372](../img/image-20200506194500372.png)
 
 由上可知操作数栈深度为2
 
-![image-20200506194634613](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506194634613.png)
+![image-20200506194634613](../img/image-20200506194634613.png)
 
 
 
@@ -393,27 +394,27 @@ stack: 操作数栈的深度
 
 **8在byte范围内，一个字节可以表示**
 
-![image-20200506220045777](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506220045777.png)
+![image-20200506220045777](../img/image-20200506220045777.png)
 
 **800即为short**
 
-![image-20200506220133540](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506220133540.png)
+![image-20200506220133540](../img/image-20200506220133540.png)
 
 **超过int,编译就会报错**
 
-![image-20200506220611887](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506220611887.png)
+![image-20200506220611887](../img/image-20200506220611887.png)
 
-![image-20200506222922985](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506222922985.png)
+![image-20200506222922985](../img/image-20200506222922985.png)
 
 load_0 就是把一个对象引用加载到局部变量表，而刚好这个对象是this因为getSum()方法就是this对象的
 
-![image-20200506223303204](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506223303204.png)
+![image-20200506223303204](../img/image-20200506223303204.png)
 
 ### 动态链接
 
 栈帧内部结构
 
-![image-20200506230904338](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200506230904338.png)
+![image-20200506230904338](../img/image-20200506230904338.png)
 
 **帧数据区**：一些附加信息，动态链接，方法返回地址
 
@@ -424,13 +425,13 @@ load_0 就是把一个对象引用加载到局部变量表，而刚好这个对�
 
 大部分字节码指令在执行时都会进行常量池的访问
 
-![image-20200508090443438](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508090443438.png)
+![image-20200508090443438](../img/image-20200508090443438.png)
 
-![image-20200508090703140](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508090703140.png)
+![image-20200508090703140](../img/image-20200508090703140.png)
 
-![image-20200508090715583](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508090715583.png)
+![image-20200508090715583](../img/image-20200508090715583.png)
 
-![image-20200508090937506](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508090937506.png)
+![image-20200508090937506](../img/image-20200508090937506.png)
 
 **Constant pool常量池在运行时期存到方法区（运行时常量池）** 
 
@@ -462,19 +463,19 @@ load_0 就是把一个对象引用加载到局部变量表，而刚好这个对�
 如果**被调用的方法在编译期无法被确定下来，只能够在程序运行期根据实际**
 **的类型绑定相关的方法**，这种绑定方式也就被称之为晚期绑定。
 
-![image-20200508101206296](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508101206296.png)
+![image-20200508101206296](../img/image-20200508101206296.png)
 
 Invoke virtual虚调用指令
 
-![image-20200508102521434](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508102521434.png)
+![image-20200508102521434](../img/image-20200508102521434.png)
 
-![image-20200508103330545](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508103330545.png)
+![image-20200508103330545](../img/image-20200508103330545.png)
 
 Invoke special早期绑定
 
 如
 
-[早期晚期绑定]: https://blog.csdn.net/u012813201/article/details/76850625
+[早期晚期绑定](https://blog.csdn.net/u012813201/article/details/76850625)
 
 随着高级语言的横空出世，I类似于Java-样的基于面向对象的编程语言如今
 越来越多，尽管这类编程语言在语法风格.上存在一定的差别，但是它们彼此
@@ -485,7 +486,9 @@ Invoke special早期绑定
 Java中任何一个普通的方法其实都具备虚函数的特征，它们相当于C++语言
 中的虛函数(C+ +中则需要使用关键字virtual来显式定义)。如果在Java
 程序中不希望某个方法拥有虛函数的特征时，则可以使用关键字final来标
-记这个方法。<!--final就是不能被重写了，在编译期就确定了。-->
+记这个方法。
+
+final就是不能被重写了，在编译期就确定了。
 
 非虚方法:
 ●如果方法在编译期就确定了具体的调用版本，这个版本在运行时是不可变的。
@@ -514,8 +517,9 @@ Java中任何一个普通的方法其实都具备虚函数的特征，它们相�
 
   前四条指令固化在虚拟机内部，方法的调用执行不可人为干预，而invokedynamic指令则支持由用户确定方法版本。其中**invokestatic指令和invokespecial指令调用的方法称为非虚方法，其余的(final修饰的除外)称为虚方法。**
 
-[关于static]: https://blog.csdn.net/ZhangWangYang/article/details/51319131
-[静态方法不能用this与super]: https://www.cnblogs.com/guweiwei/p/6978814.html
+[关于static](https://blog.csdn.net/ZhangWangYang/article/details/51319131)
+
+[静态方法不能用this与super](https://www.cnblogs.com/guweiwei/p/6978814.html)
 
   ```java
   
@@ -591,7 +595,7 @@ Java中任何一个普通的方法其实都具备虚函数的特征，它们相�
   }
   ```
 
-![image-20200508154011708](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508154011708.png)
+![image-20200508154011708](../img/image-20200508154011708.png)
 
 **方法的调用：关于invokedynamic指令**
 
@@ -614,7 +618,7 @@ JS: varname = "shkstart"; var name = 10 ;
 Python:info = 130. 5;
 ```
 
-![image-20200508170733359](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508170733359.png)
+![image-20200508170733359](../img/image-20200508170733359.png)
 
 ### 方法的调用：方法重写的本质
 
@@ -642,15 +646,15 @@ Python:info = 130. 5;
 
 **方法调用：虚方法表**
 
-![image-20200508172020646](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508172020646.png)
+![image-20200508172020646](../img/image-20200508172020646.png)
 
-![image-20200508172604697](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508172604697.png)
+![image-20200508172604697](../img/image-20200508172604697.png)
 
-![image-20200508174128592](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200508174128592.png)
+![image-20200508174128592](../img/image-20200508174128592.png)
 
-![image-20200510135739972](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510135739972.png)
+![image-20200510135739972](../img/image-20200510135739972.png)
 
-![image-20200510140057975](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510140057975.png)
+![image-20200510140057975](../img/image-20200510140057975.png)
 
 ```java
 package top.p3wj.java3;
@@ -721,7 +725,7 @@ class CockerSpaniel extends Dog implements Friendly {
 
 ●无论通过哪种方式退出，在方法退出后都返回到该方法被调用的位置。方法正常退出时，**调用者的pc计数器的值作为返回地址，即调用该方法的指令的下一条指令的地址。**而通过异常退出的，返回地址是要通过异常表来确定，栈帧中一般不会保存这部分信息。
 
-<!--交给执行引擎，去执行后续的操作-->
+交给执行引擎，去执行后续的操作
 
 **区别：**
 
@@ -735,7 +739,7 @@ class CockerSpaniel extends Dog implements Friendly {
 ➢在字节码指令中，返回指令包含ireturn (当返回值是boolean、byte、 char.
 short和int类型时使用)、lreturn、 freturn、 dreturn以及areturn，另外还有一个return指令供声明为void的方法、实例初始化方法、类和接口的初始化方法使用。
 
-![image-20200510143621443](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510143621443.png)
+![image-20200510143621443](../img/image-20200510143621443.png)
 
 其他的就不截图了
 
@@ -754,13 +758,13 @@ short和int类型时使用)、lreturn、 freturn、 dreturn以及areturn，另�
 
 以上数字为字节码指令地址
 
-<!--如果在4-16行出现异常，则用19行处理，针对任何类型-->
+如果在4-16行出现异常，则用19行处理，针对任何类型
 
-![image-20200510144330009](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510144330009.png)
+![image-20200510144330009](../img/image-20200510144330009.png)
 
 goto,直接到16.即要是没处理就直接return了，处理就按照11行
 
-![image-20200510144614298](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510144614298.png)
+![image-20200510144614298](../img/image-20200510144614298.png)
 
 
 
@@ -768,7 +772,7 @@ goto,直接到16.即要是没处理就直接return了，处理就按照11行
 
 有的文章、论坛会有这个部分
 
-![image-20200510144807156](/Users/piwenjing/Library/Application Support/typora-user-images/image-20200510144807156.png)
+![image-20200510144807156](../img/image-20200510144807156.png)
 
 栈帧中还允许|携带与Java虚拟机实现相关的一些附加信息。例如,对程序调试提供支持的信息。
 
