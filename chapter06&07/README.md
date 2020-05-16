@@ -73,7 +73,7 @@ JVM支持着Java语言本身和运行时库，它是Java程序赖以生存的平
 **本地方法栈的使用语言、具体实现方式、数据结构等。**如果JVM产品不打算支持native方法，也可以无需实现本地方法栈。
 ●在Hotspot JVM中， 直接将本地方法栈和虚拟机栈合二为-。
 
-![image-20200510155636354](../img/image-20200510155636354.png)
+![image-20200510155636354](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200510155636354.png)
 
 ```java
 public synchronized void start() {

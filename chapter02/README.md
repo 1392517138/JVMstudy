@@ -2,14 +2,14 @@
 
 ## 02类加载子系统
 
-![image-20200430152256052](../img/image-20200430152256052.png)
+![image-20200430152256052](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430152256052.png)
 
 如果自己手写一一个Java虚拟机的话，主要考虑哪些结构呢?
 **类加载器**  和  **执行引擎**
 
 #### 类加载器与类的加载过程
 
-![image-20200430152521659](../img/image-20200430152521659.png)
+![image-20200430152521659](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430152521659.png)
 
 对于第三点常量池
 
@@ -17,9 +17,9 @@
 
 在运行时加载到内存里，就叫做运行时常量池
 
-![image-20200430153242226](../img/image-20200430153242226.png)
+![image-20200430153242226](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430153242226.png)
 
-![image-20200430153339552](../img/image-20200430153339552.png)
+![image-20200430153339552](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430153339552.png)
 
 1. 编译后到Car class文件放在硬盘上
 2. 物理磁盘中的文件通过二进制流的方式加载到内存
@@ -30,11 +30,11 @@
 
 
 
-![image-20200430154126531](../img/image-20200430154126531.png)
+![image-20200430154126531](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430154126531.png)
 
 ###### 一个简单的例子
 
-![image-20200430154157028](../img/image-20200430154157028.png)
+![image-20200430154157028](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430154157028.png)
 
 自定义类使用的是系统类加载器，如果加载的过程中不是一个合法的字节码文件，会抛出异常
 
@@ -80,11 +80,11 @@
 
 **打开字节码文件查看二进制**
 
-![image-20200430203116981](../img/image-20200430203116981.png)
+![image-20200430203116981](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430203116981.png)
 
 字节码启始为CAFE BABE代表JAVA虚拟机的特定标识，验证过程
 
-![image-20200430205325554](../img/image-20200430205325554.png)
+![image-20200430205325554](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430205325554.png)
 
 反编译后，常量池中会加载这些许多的类
 
@@ -101,15 +101,15 @@
   已经执行完毕。
 - 虚拟机必须保证-一个类的<clinit>()方法在多线程下被同步加锁。
 
-![image-20200430211522096](../img/image-20200430211522096.png)
+![image-20200430211522096](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430211522096.png)
 
-![image-20200430211858677](../img/image-20200430211858677.png)
+![image-20200430211858677](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430211858677.png)
 
-![image-20200430212932602](../img/image-20200430212932602.png)
+![image-20200430212932602](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430212932602.png)
 
 **注意**
 
-![image-20200430213238905](../img/image-20200430213238905.png)
+![image-20200430213238905](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430213238905.png)
 
 可以赋值，若前面没有声明不能引用
 
@@ -119,20 +119,20 @@
 
 若没有类变量与静态代码块，则不会存在<clinit>
 
-![image-20200430214411600](../img/image-20200430214411600.png)
+![image-20200430214411600](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430214411600.png)
 
 **此时就有了**
 
-![image-20200430214516338](../img/image-20200430214516338.png)
+![image-20200430214516338](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430214516338.png)
 
 **构造器方法**
-![image-20200430220020097](../img/image-20200430220020097.png)
+![image-20200430220020097](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430220020097.png)
 
-![image-20200430220906230](../img/image-20200430220906230.png)
+![image-20200430220906230](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430220906230.png)
 
 一个类的<clinit>()方法在多线程下被同步加锁
 
-![image-20200430230446539](../img/image-20200430230446539.png)
+![image-20200430230446539](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430230446539.png)
 
 **注意，若业务中出现此情况，会将其他线程变成阻塞状态**
 
@@ -146,11 +146,11 @@
 - 无论类加载器的类型如何划分，在程序中我们最常见的类加载器始终只有3
   个，如下所示:
 
-![image-20200430231135242](../img/image-20200430231135242.png)
+![image-20200430231135242](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430231135242.png)
 
 **Extention Class Loader 与 System Class Loader都间接继承了ClassLoader，所以他们也被称为自定义加载器**
 
-![image-20200430231203583](../img/image-20200430231203583.png)
+![image-20200430231203583](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430231203583.png)
 
 1. **Class类中**
 
@@ -168,7 +168,7 @@ public ClassLoader getClassLoader() {
 }
 ```
 
-![image-20200501000100707](../img/image-20200501000100707.png)
+![image-20200501000100707](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501000100707.png)
 
 [关于类加载器的双亲委派模型](https://blog.csdn.net/javazejian/article/details/73413292)
 
@@ -191,7 +191,7 @@ public ClassLoader getClassLoader() {
 
 <u>Extension ClassLoader为Launcher的一个内部类</u>
 
-![image-20200501230138066](../img/image-20200501230138066.png)
+![image-20200501230138066](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501230138066.png)
 
 **应用程序类加载器(系统类加载器，AppClassLoader )**
 ➢java语言编写，由sun. misc. Launcher$AppClassLoader实现
@@ -201,23 +201,23 @@ public ClassLoader getClassLoader() {
 ➢**该类加载是程序中默认的类加载器**，一般来说，Java应用的类都是由它来完成加载
 ➢通过ClassLoader#getSystemClassLoader ()方法可以获取到该类加载器
 
-![image-20200501230540170](../img/image-20200501230540170.png)
+![image-20200501230540170](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501230540170.png)
 
 **ClassLoader1**
 
-![image-20200501231701249](../img/image-20200501231701249.png)
+![image-20200501231701249](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501231701249.png)
 
 结果： 
 
 [rt.jar的作用](https://blog.csdn.net/u011305680/article/details/80380532)
 
-![image-20200501231734513](../img/image-20200501231734513.png)
+![image-20200501231734513](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501231734513.png)
 
-![image-20200501232806861](../img/image-20200501232806861.png)
+![image-20200501232806861](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501232806861.png)
 
 同理：
 
-![image-20200501234742495](../img/image-20200501234742495.png)
+![image-20200501234742495](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200501234742495.png)
 
 **用户自定义类加载器**
 ●在Java的日常应用程序开发中，类的加载几乎是由上述3种类加载器相互配合执行的，在必要时，我们还可以自定义类加载器，来定制类的加载方式。
@@ -365,19 +365,19 @@ class文件时，Java虚拟机采用的是**双亲委派模式**，即把请求�
 
 <!--静态代码块在第三个阶段（初始化）被调用，把静态代码块，静态变量显示赋值放在<clinit>中-->
 
-![image-20200502105349223](../img/image-20200502105349223.png)
+![image-20200502105349223](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502105349223.png)
 
-![image-20200502110226182](../img/image-20200502110226182.png)
+![image-20200502110226182](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502110226182.png)
 
 从结果来看不是执行的自定义实现的String。为了这种防止，引入双亲委派机制
 
-![image-20200502105501988](../img/image-20200502105501988.png)
+![image-20200502105501988](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502105501988.png)
 
 所以String不会由AppClassLoader加载,会由引导类加载器加载
 
 再举一个例子：
 
-![image-20200502110556907](../img/image-20200502110556907.png)
+![image-20200502110556907](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502110556907.png)
 
 1. 想要去执行main方法，则main方法所在的类需要被加载
 2. 为这个String,委托给BootstrapLoader。它就加载了核心API的java.lang中的String,但是没有main方法，所以报错
@@ -386,9 +386,9 @@ class文件时，Java虚拟机采用的是**双亲委派模式**，即把请求�
 
 他这个双亲委派针对于包名，类名相同的情况下，加如我设置包名不同（自己定义的类），它为AppClassLoader
 
-![image-20200502114100458](../img/image-20200502114100458.png)
+![image-20200502114100458](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502114100458.png)
 
-![image-20200502114130213](../img/image-20200502114130213.png)
+![image-20200502114130213](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502114130213.png)
 
 下面对以上流程作出一个解释：
 
@@ -408,7 +408,7 @@ java. lang. SecurityException:Prohibited package name: java.lang
 
 举例：
 
-![image-20200502120549976](../img/image-20200502120549976.png)
+![image-20200502120549976](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502120549976.png)
 
 阻止报名为java.lang包。我们按照双亲委派机制依次往上，Bootstrap ClassLoader发现为java开头,则发现为自己管的，它就去加载这个类。java.lang包的访问需要权限，**java.lang.SecurityException**,阻止我们用这个报名定义我们的自定义类。你可能会问这个跟之前String区别，我的理解是：因为存在这个机制，String本来就会在Bootstrap ClassLoader中加载成功，所以String不会影响。但是若Aaron加载成功（本来引导类加载器它自身没有这个东西），它可能就会怀疑是恶意的，会对它自己有影响。
 

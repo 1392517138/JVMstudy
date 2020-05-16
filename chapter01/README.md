@@ -1,12 +1,12 @@
 ##第一章笔记
 ####此记录来源于尚硅谷JVM(宋红康)，在此记录以做分享
-![image-20200429194556090](../img/image-20200429194556090.png)
+![image-20200429194556090](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429194556090.png)
 
 
 
 #### JAVA代码执行流程
 
-![image-20200429194831110](../img/image-20200429194831110.png)
+![image-20200429194831110](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429194831110.png)
 
 每个字节码文件对于一个类
 
@@ -14,7 +14,7 @@ JAVA编译器（前端编译器）
 
 编译器环节任何一个失败了，都不能生成字节码文件
 
-![image-20200429194908948](../img/image-20200429194908948.png)
+![image-20200429194908948](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429194908948.png)
 
 操作系统并不识别字节码指令，所以需要后端编译器，JIT解释为机器指令。由执行引擎完成。
 
@@ -22,7 +22,7 @@ JAVA编译器（前端编译器）
 
 **第二次编译**：将字节码文件编译为机器指令。同时因为机器指令他是需要反复执行的，将热点代码缓存起来了（JIT），提高性能。所以<u>由翻译字节码、JIT编译器两部分组成</u>
 
-![image-20200429195145051](../img/image-20200429195145051.png)
+![image-20200429195145051](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429195145051.png)
 
 Java编译器输入的指令流基本上是一种基于**栈的指令集架构**，另外一种指令集架构则
 是基于寄存器的指令集架构。
@@ -42,15 +42,15 @@ Java编译器输入的指令流基本上是一种基于**栈的指令集架构**
 ➢在大部分情况下，基于寄存器架构的指令集往往都以一地址指令、二地址指令
 和三地址指令为主，而基于栈式架构的指令集却是以零地址指令为主。
 
-![image-20200429201350985](../img/image-20200429201350985.png)
+![image-20200429201350985](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429201350985.png)
 
 ```
 * 在out中反编译 javap -v
 ```
 
-![image-20200429203538252](../img/image-20200429203538252.png)
+![image-20200429203538252](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429203538252.png)
 
-![image-20200429203420941](../img/image-20200429203420941.png)
+![image-20200429203420941](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429203420941.png)
 **总结:** 
 **由于跨平台性的设计，Java的指令都是根据栈来设计的**。不同平台CPU架构不
 同，所以不能设计为基于寄存器的。优点是跨平台， 指令集小，编译器容易
@@ -63,15 +63,15 @@ Java编译器输入的指令流基本上是一种基于**栈的指令集架构**
 
 JVM**生命周期**-三个状态
 
-![image-20200429211035248](../img/image-20200429211035248.png)
+![image-20200429211035248](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429211035248.png)
 
 ```java
 * jps 打印当前程序执行过程中对进程
 ```
 
-![image-20200429224531656](../img/image-20200429224531656.png)
+![image-20200429224531656](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429224531656.png)
 
-![image-20200429233622851](../img/image-20200429233622851.png)
+![image-20200429233622851](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200429233622851.png)
 
 ```
 运行时环境区，单例的
@@ -171,7 +171,7 @@ static native void halt0(int status);
 
 **JVM发展历史**
 
-![image-20200430001351315](../img/image-20200430001351315.png)
+![image-20200430001351315](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200430001351315.png)
 
 
 
