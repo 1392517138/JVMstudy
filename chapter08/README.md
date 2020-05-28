@@ -2,9 +2,9 @@
 
 #### JVM学习路线和内容回顾
 
-![image-20200523203003162](https://github.com/1392517138/imgRepository/blob/master/image-20200523203003162.png)
+![image-20200523203003162](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523203003162.png)
 
-**![image-20200523204000784](https://github.com/1392517138/imgRepository/blob/master/image-20200523204000784.png)**
+**![image-20200523204000784](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523204000784.png)**
 
 **LV：本地变量表**
 
@@ -16,7 +16,7 @@
 
 #### 堆空间的概述——进程中的唯一性
 
-![image-20200523204316746](https://github.com/1392517138/imgRepository/blob/master/image-20200523204316746.png)
+![image-20200523204316746](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523204316746.png)
 
  **一个进程对应一个jvm实例，一个运行时数据区。一个进程中的多个线程共享同一个方法区、堆空间，各自拥有程序计数器、本地方法栈、虚拟机栈**
 
@@ -28,23 +28,23 @@
 
 1.准备：设置不同的堆空间大小
 
-![image-20200523210916854](https://github.com/1392517138/imgRepository/blob/master/image-20200523210916854.png)
+![image-20200523210916854](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523210916854.png)
 
-![image-20200523210939487](https://github.com/1392517138/imgRepository/blob/master/image-20200523210939487.png)
+![image-20200523210939487](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523210939487.png)
 
-![image-20200523210958825](https://github.com/1392517138/imgRepository/blob/master/image-20200523210958825.png)
+![image-20200523210958825](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523210958825.png)
 
 2.分别跑起来,**接下来我们来看一下这两个进程**
 
 之后在jdk1.8/contents/homt/bin目录下找到jvisualvm
 
-![image-20200523211323483](https://github.com/1392517138/imgRepository/blob/master/image-20200523211323483.png)
+![image-20200523211323483](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523211323483.png)
 
-![image-20200523211426660](https://github.com/1392517138/imgRepository/blob/master/image-20200523211426660.png)
+![image-20200523211426660](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523211426660.png)
 
 若没有visual gc,则点击菜单中工具里的插件,此时就有了
 
-![image-20200523212238752](https://github.com/1392517138/imgRepository/blob/master/image-20200523212238752.png)
+![image-20200523212238752](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523212238752.png)
 
 #### 堆空间关于对象创建和GC的概述
 
@@ -54,35 +54,35 @@
 ●在方法结束后，堆中的对象不会马上被移除，仅仅在垃圾收集的时候才会被移除。
 ●堆，是GC ( Garbage Collection, 垃圾收集器)执行垃圾回收的重点区域。
 
-![image-20200523213852303](https://github.com/1392517138/imgRepository/blob/master/image-20200523213852303.png)
+![image-20200523213852303](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523213852303.png)
 
 对应这样的场景
 
-![image-20200523213906307](https://github.com/1392517138/imgRepository/blob/master/image-20200523213906307.png)
+![image-20200523213906307](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523213906307.png)
 
 main方法结束后，s1,s2就被弹出栈，堆中的s1,s2实例就没有被引用了，当GC进行判断的时候，发现s1,s2没有被引用，就判断为垃圾.**如果变为栈中的一走，堆中的对象就被回收，那么GC的频率将特别高**
 
 来看一下对象的创建：
 
-![image-20200523214532877](https://github.com/1392517138/imgRepository/blob/master/image-20200523214532877.png)
+![image-20200523214532877](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523214532877.png)
 
 #### 堆的戏份内容结构
 
-![image-20200523214652258](https://github.com/1392517138/imgRepository/blob/master/image-20200523214652258.png)
+![image-20200523214652258](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523214652258.png)
 
-![image-20200523214917451](https://github.com/1392517138/imgRepository/blob/master/image-20200523214917451.png)
+![image-20200523214917451](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523214917451.png)
 
-![image-20200523215640280](https://github.com/1392517138/imgRepository/blob/master/image-20200523215640280.png)
+![image-20200523215640280](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523215640280.png)
 
-![image-20200523215613959](https://github.com/1392517138/imgRepository/blob/master/image-20200523215613959.png)
+![image-20200523215613959](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523215613959.png)
 
 **加起来刚好10m,逻辑上是3部分，但是实际管辖的是这两部分：新生区、老年区**
 
-![image-20200523215656382](https://github.com/1392517138/imgRepository/blob/master/image-20200523215656382.png)
+![image-20200523215656382](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523215656382.png)
 
-![image-20200523220204078](https://github.com/1392517138/imgRepository/blob/master/image-20200523220204078.png)
+![image-20200523220204078](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523220204078.png)
 
-![image-20200523220258808](https://github.com/1392517138/imgRepository/blob/master/image-20200523220258808.png)
+![image-20200523220258808](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200523220258808.png)
 
 #### 堆空间大小的设置和查看
 
@@ -96,11 +96,11 @@ main方法结束后，s1,s2就被弹出栈，堆中的s1,s2实例就没有被引
 
 1.
 
-![image-20200524094400141](https://github.com/1392517138/imgRepository/blob/master/image-20200524094400141.png)
+![image-20200524094400141](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524094400141.png)
 
 2.
 
-![image-20200524094557146](https://github.com/1392517138/imgRepository/blob/master/image-20200524094557146.png)
+![image-20200524094557146](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524094557146.png)
 
 这里出现一个问题为初始与最大是一样的值
 
@@ -110,47 +110,47 @@ main方法结束后，s1,s2就被弹出栈，堆中的s1,s2实例就没有被引
 
 因为在不断扩容和释放的过程中会对系统造成额外压力
 
-![image-20200524094936162](https://github.com/1392517138/imgRepository/blob/master/image-20200524094936162.png)
+![image-20200524094936162](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524094936162.png)
 
 那么这个数怎么算出来的呢?我们先添加这一行，并打开命令行输入jps(查看当前程序进程)，jstat查看某进程在使用过程中内存使用情况
 
-![image-20200524095019676](https://github.com/1392517138/imgRepository/blob/master/image-20200524095019676.png)
+![image-20200524095019676](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524095019676.png)
 
-![image-20200524095242021](https://github.com/1392517138/imgRepository/blob/master/image-20200524095242021.png)
+![image-20200524095242021](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524095242021.png)
 
 OC：总量	OU：你使用了多少
 
-![image-20200524105828009](https://github.com/1392517138/imgRepository/blob/master/image-20200524105828009.png)
+![image-20200524105828009](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105828009.png)
 
-![image-20200524095859867](https://github.com/1392517138/imgRepository/blob/master/image-20200524095859867.png)
+![image-20200524095859867](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524095859867.png)
 
 但是为什么运行时是575m呢
 
-![image-20200524105754582](https://github.com/1392517138/imgRepository/blob/master/image-20200524105754582.png)
+![image-20200524105754582](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105754582.png)
 
 3.另一种方式查看,并把Thread.sleep去掉
 
-![image-20200524100434564](https://github.com/1392517138/imgRepository/blob/master/image-20200524100434564.png)
+![image-20200524100434564](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524100434564.png)
 
-![image-20200524103121521](https://github.com/1392517138/imgRepository/blob/master/image-20200524103121521.png)
+![image-20200524103121521](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524103121521.png)
 
 #### OOM的说明与举例
 
 并设置参数-Xms600m	-Xmx600m
 
-![image-20200524105038912](https://github.com/1392517138/imgRepository/blob/master/image-20200524105038912.png)
+![image-20200524105038912](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105038912.png)
 
-![image-20200524105133836](https://github.com/1392517138/imgRepository/blob/master/image-20200524105133836.png)
+![image-20200524105133836](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105133836.png)
 
 打开jvisualvm,再跑起来
 
-![image-20200524105213428](https://github.com/1392517138/imgRepository/blob/master/image-20200524105213428.png)
+![image-20200524105213428](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105213428.png)
 
-![image-20200524105239794](https://github.com/1392517138/imgRepository/blob/master/image-20200524105239794.png)
+![image-20200524105239794](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105239794.png)
 
 查看抽样器，可查看原因，原因为byte[]太多
 
-![image-20200524105351397](https://github.com/1392517138/imgRepository/blob/master/image-20200524105351397.png)
+![image-20200524105351397](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105351397.png)
 
 #### 新生代与老年代中相关参数的设置
 
@@ -160,10 +160,10 @@ OC：总量	OU：你使用了多少
 - Java堆区进一步细分的话， 可以划分为年轻代(YoungGen)和老年代(OldGen)
 - 其中年轻代又可以划分为Eden空间、Survivor0空间和Survivor1空间 (有时也叫做from区、to区)。
 
-![image-20200524105658826](https://github.com/1392517138/imgRepository/blob/master/image-20200524105658826.png)
+![image-20200524105658826](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524105658826.png)
 
 下面这参数开发中一般不会调：
-![image-20200524110122166](https://github.com/1392517138/imgRepository/blob/master/image-20200524110122166.png)
+![image-20200524110122166](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524110122166.png)
 
 ● 配置新生代与老年代在堆结构的占比。
 ➢默认-XX:NewRatio=2，表示新生代占1，老年代占2，新生代占整个堆的1/3
@@ -171,9 +171,9 @@ OC：总量	OU：你使用了多少
 
 1.方式一
 
-![image-20200524110354979](https://github.com/1392517138/imgRepository/blob/master/image-20200524110354979.png)
+![image-20200524110354979](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524110354979.png)
 
-![image-20200524110501737](https://github.com/1392517138/imgRepository/blob/master/image-20200524110501737.png)
+![image-20200524110501737](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524110501737.png)
 
 默认比例1:2
 
@@ -183,7 +183,7 @@ OC：总量	OU：你使用了多少
 
 通过jinfo -flag 
 
-![image-20200524110937645](https://github.com/1392517138/imgRepository/blob/master/image-20200524110937645.png)
+![image-20200524110937645](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524110937645.png)
 
 - 在HotSpot中，Eden 空间和另外两个Survivor空间缺省所占的比例是8:1:1
 -  当然开发人员可以通过选项“-XX:SurvivorRatio”调整这个空间比例。比如-XX: SurvivorRatio=8
@@ -197,11 +197,11 @@ OC：总量	OU：你使用了多少
 
 那么理论新生代是200m,则eden为160m，打开jvisualvm看一下
 
-![image-20200524111531405](https://github.com/1392517138/imgRepository/blob/master/image-20200524111531405.png)
+![image-20200524111531405](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524111531405.png)
 
 我们发现变成6:1:1了，我们从命令行看一下
 
-![image-20200524111713713](https://github.com/1392517138/imgRepository/blob/master/image-20200524111713713.png)
+![image-20200524111713713](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524111713713.png)
 
 还是6:1:1
 
@@ -211,25 +211,25 @@ OC：总量	OU：你使用了多少
 -XX:-UseAdaptiveSizePolicy：关闭自适应的内存分配策略（暂时用不到）
 ```
 
-![image-20200524111949573](https://github.com/1392517138/imgRepository/blob/master/image-20200524111949573.png)
+![image-20200524111949573](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524111949573.png)
 
-![image-20200524112115834](https://github.com/1392517138/imgRepository/blob/master/image-20200524112115834.png)
+![image-20200524112115834](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524112115834.png)
 
 但发现还是6:1:1
 
 这时候就要用到-XX:SurvivorRatio
 
-![image-20200524112215387](https://github.com/1392517138/imgRepository/blob/master/image-20200524112215387.png)
+![image-20200524112215387](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524112215387.png)
 
-![image-20200524112228284](https://github.com/1392517138/imgRepository/blob/master/image-20200524112228284.png)
+![image-20200524112228284](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524112228284.png)
 
 **这样就成功了**
 
 如果new一个对象非常大，Eden区放不下了，这个时候就放入老年代
 
-![image-20200524112607343](https://github.com/1392517138/imgRepository/blob/master/image-20200524112607343.png)
+![image-20200524112607343](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524112607343.png)
 
-![image-20200524112851080](https://github.com/1392517138/imgRepository/blob/master/image-20200524112851080.png)
+![image-20200524112851080](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524112851080.png)
 
 #### 图解对象分配的一般过程
 
@@ -262,7 +262,7 @@ OC：总量	OU：你使用了多少
 
 1.
 
-![image-20200524143438116](https://github.com/1392517138/imgRepository/blob/master/image-20200524143438116.png)
+![image-20200524143438116](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524143438116.png)
 
 Eden区放着放满了（此时用户线程停止，触发GC【判断哪些是垃圾，红色的是垃圾，然后释放】）就往S0或S1【幸存者区】放。可以看到是一，我们为每个对象分配了一个年龄计数器。此时Eden区里面就没有数据了，被清空了。
 
@@ -270,13 +270,13 @@ Eden区放着放满了（此时用户线程停止，触发GC【判断哪些是�
 
 此时又放：
 
-![image-20200524143922880](https://github.com/1392517138/imgRepository/blob/master/image-20200524143922880.png)
+![image-20200524143922880](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524143922880.png)
 
 伊甸园区满了，又进行一次Minor GC，是放在S0还是S1呢？是放在S1当中。进入1之后，S1为空的，就称为to【表示空】。**当放入进S1，即这个1标注1号的柱子，此时S0中的1号柱子也要进行判断，当发现这俩还被占用，还不能被销毁，就把S0区的放入S1区并增长2。此时S1就是from区，S0空了就是to区，以此类推。**
 
 3.
 
-![image-20200524143454989](https://github.com/1392517138/imgRepository/blob/master/image-20200524143454989.png)
+![image-20200524143454989](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524143454989.png)
 
 走着走着就进入特殊情况：
 Eden又满了，就继续放入S0，S1进行判断，1号还用就放入S0。我们发现S1中有两个已经达到15了，就晋升至老年代，放入Old,此时就不进行判断它了。**只有当有柱子再进入老年代的时候才进行判断。15称为阈值（临界值，默认的）**
@@ -292,7 +292,7 @@ Eden区满出发YGC，S区满了不会触发。Eden触发GC的时候会将Eden�
 
 #### 对象分配的特殊情况
 
-![image-20200524145910809](https://github.com/1392517138/imgRepository/blob/master/image-20200524145910809.png)
+![image-20200524145910809](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524145910809.png)
 
 EdenGC后此时Eden是空的，假如Eden是10m，要放一个12m的对象，可直接放入老年代，则在老年代中分配内存空间。
 
@@ -305,29 +305,29 @@ EdenGC后此时Eden是空的，假如Eden是10m，要放一个12m的对象，可
 我们来模拟这个过程：
 1.
 
-![image-20200524153209187](https://github.com/1392517138/imgRepository/blob/master/image-20200524153209187.png)
+![image-20200524153209187](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524153209187.png)
 
 2.
 
-![image-20200524153217281](https://github.com/1392517138/imgRepository/blob/master/image-20200524153217281.png)
+![image-20200524153217281](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524153217281.png)
 
 进入YGC,放入S1
 
 3.
 
-![image-20200524153234816](https://github.com/1392517138/imgRepository/blob/master/image-20200524153234816.png)
+![image-20200524153234816](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524153234816.png)
 
 第二次YGC，从S1放入S0,S1变to区
 
 4.
 
-![image-20200524153251994](https://github.com/1392517138/imgRepository/blob/master/image-20200524153251994.png)
+![image-20200524153251994](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524153251994.png)
 
 继续上面的步骤
 
 5.
 
-![image-20200524153505398](https://github.com/1392517138/imgRepository/blob/master/image-20200524153505398.png)
+![image-20200524153505398](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524153505398.png)
 
 **最终Old满了，抛出OOM，因为我们始终放在ArrayList中，没有垃圾**
 
@@ -348,7 +348,7 @@ MetaSpace就一直处于类数据的加载，比较平稳，没有去加载一�
 - GCViewer
 - GC Easy
 
-![image-20200524170539641](https://github.com/1392517138/imgRepository/blob/master/image-20200524170539641.png)
+![image-20200524170539641](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200524170539641.png)
 
 #### Minor Gc、Major GC和Full GC的对比
 
@@ -374,7 +374,7 @@ JVM在进行GC时，并非每次都对上面三个内存区域(新生代、老�
 ➢Minor GC会引发STW， 暂停其它用户的线程，等垃圾回收结束，用户线
 程才恢复运行。
 
-![image-20200527123619636](https://github.com/1392517138/imgRepository/blob/master/image-20200527123619636.png)
+![image-20200527123619636](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527123619636.png)
 
 **老年代GC (Major GC/Fu1l GC)触发机制:**
 ➢指发生在老年代的GC，对象从老年代消失时，我们说“Major GC”或“Full GC”
@@ -398,15 +398,15 @@ Scavenge收集器的收集策略里就有直接)。
 
 #### GC举例与日志分析
 
-![image-20200527154345824](https://github.com/1392517138/imgRepository/blob/master/image-20200527154345824.png)
+![image-20200527154345824](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527154345824.png)
 
-![image-20200527154358889](https://github.com/1392517138/imgRepository/blob/master/image-20200527154358889.png)
+![image-20200527154358889](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527154358889.png)
 
 字符串常量池存在堆空间的，（以前在方法区）
 
 不断添加，导致了OOM
 
-![image-20200527154517442](https://github.com/1392517138/imgRepository/blob/master/image-20200527154517442.png)
+![image-20200527154517442](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527154517442.png)
 
 GC年轻代，FullGC（老年代+整个堆区、方法区）
 
@@ -414,15 +414,15 @@ GC年轻代，FullGC（老年代+整个堆区、方法区）
 
 1.
 
-![image-20200527155034072](https://github.com/1392517138/imgRepository/blob/master/image-20200527155034072.png)
+![image-20200527155034072](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527155034072.png)
 
 2.
 
-![image-20200527155904978](https://github.com/1392517138/imgRepository/blob/master/image-20200527155904978.png)
+![image-20200527155904978](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527155904978.png)
 
 3.
 
-![image-20200527160910583](https://github.com/1392517138/imgRepository/blob/master/image-20200527160910583.png)
+![image-20200527160910583](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527160910583.png)
 
 
 
@@ -433,12 +433,12 @@ GC年轻代，FullGC（老年代+整个堆区、方法区）
 ➢新生代:有Eden、两块大小相同的Survivor(又称为from/to， s0/s1)构成，to总为空。
 ➢老年代:存放新生代中经历多次GC仍然存活的对象。
 
-![image-20200527161159646](https://github.com/1392517138/imgRepository/blob/master/image-20200527161159646.png)
+![image-20200527161159646](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527161159646.png)
 
 **为什么需要把Java堆分代?不分代就不能正常工作了吗?**
 ●其实不分代完全可以，分代的唯一理由就是**优化GC性能**。如果没有分代，那所有的对象都在一块，就如同把一个学校的人都关在一个教室。GC的时 候要找到哪些对象没用，这样就会对堆的所有区域进行扫描。而很多对象都是朝生夕死的，如果分代的话，把新创建的对象放到某一地方，当GC的时候先把这块存储“朝生夕死”对象的区域进行回收，这样就会腾出很大的空间出来。
 
-![image-20200527161311571](https://github.com/1392517138/imgRepository/blob/master/image-20200527161311571.png)
+![image-20200527161311571](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527161311571.png)
 
 #### 内存分配策略(或对象提升（Promotion）规则)
 
@@ -456,7 +456,7 @@ GC年轻代，FullGC（老年代+整个堆区、方法区）
 ●空间分配担保
 ➢-XX: HandlePromotionFailure
 
-![image-20200527164220614](https://github.com/1392517138/imgRepository/blob/master/image-20200527164220614.png)
+![image-20200527164220614](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527164220614.png)
 
 #### 为对象分配内存：TLAB
 
@@ -472,7 +472,7 @@ GC年轻代，FullGC（老年代+整个堆区、方法区）
 ●多线程同时分配内存时，使用TLAB可以避免一系列的非线程安全问题，同时还能够提升内存分配的吞吐量，因此我们可以将这种内存分配方式称之为**快速分配策略**。
 ●据说所有OpenJDK衍生出来的JVM都提供了TLAB的设计。
 
-![image-20200527164854508](https://github.com/1392517138/imgRepository/blob/master/image-20200527164854508.png)
+![image-20200527164854508](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527164854508.png)
 
 每个线程有一份，使用完了再用公共的
 
@@ -483,11 +483,11 @@ GC年轻代，FullGC（老年代+整个堆区、方法区）
 ●默认情况下，TLAB空间的内存非常小，**仅占有整个Eden空间的1%**，当然我们可以通过选项“-XX:TLABWasteTargetPercent”设置TLAB空间所占用Eden空间的百分比大小。
 ●一旦对象在TLAB空间分配内存失败时，JVM就会尝试着通过**使用加锁机制**确保数据操作的原子性，从而直接在Eden空间中分配内存。
 
-![image-20200527170603051](https://github.com/1392517138/imgRepository/blob/master/image-20200527170603051.png)
+![image-20200527170603051](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527170603051.png)
 
 默认是开启的
 
-![image-20200527170706159](https://github.com/1392517138/imgRepository/blob/master/image-20200527170706159.png)
+![image-20200527170706159](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527170706159.png)
 
 #### 小结堆空间的参数设置
 [官网说明](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html)
@@ -541,15 +541,15 @@ public class HeapArgsTest {
 
 1.PrintFlagInital
 
-![image-20200527212718272](https://github.com/1392517138/imgRepository/blob/master/image-20200527212718272.png)
+![image-20200527212718272](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527212718272.png)
 
-![image-20200527212802046](https://github.com/1392517138/imgRepository/blob/master/image-20200527212802046.png)
+![image-20200527212802046](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527212802046.png)
 
 2.PrintFlagFinal
 
-![image-20200527213044211](https://github.com/1392517138/imgRepository/blob/master/image-20200527213044211.png)
+![image-20200527213044211](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527213044211.png)
 
-![image-20200527213134281](https://github.com/1392517138/imgRepository/blob/master/image-20200527213134281.png)
+![image-20200527213134281](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527213134281.png)
 
 ":="代表重新做的赋值
 
@@ -591,11 +591,11 @@ heap外，并且GC不能管理GCIH内部的Java对象，以此达到降低Gc的�
   ➢当一个对象在方法中被定义后，它被外部方法所引用，则认为发生逃
   逸。例如作为调用参数传递到其他地方中。
 
-![image-20200527221831042](https://github.com/1392517138/imgRepository/blob/master/image-20200527221831042.png)
+![image-20200527221831042](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527221831042.png)
 
 new 的这个V对象没有发生逃逸，就放在栈上
 
-![image-20200527222004329](https://github.com/1392517138/imgRepository/blob/master/image-20200527222004329.png)
+![image-20200527222004329](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200527222004329.png)
 
 绿色方框中的代码因为StringBuffer()被返回了，跳出了该方法作用于，产生了逃逸，不能在栈中分配
 
@@ -626,39 +626,39 @@ new 的这个V对象没有发生逃逸，就放在栈上
 
 1.
 
-![image-20200528131508123](https://github.com/1392517138/imgRepository/blob/master/image-20200528131508123.png)
+![image-20200528131508123](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528131508123.png)
 
-![image-20200528131519506](https://github.com/1392517138/imgRepository/blob/master/image-20200528131519506.png)
+![image-20200528131519506](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528131519506.png)
 
 打开jvisualvm
 
-![image-20200528132354514](https://github.com/1392517138/imgRepository/blob/master/image-20200528132354514.png)
+![image-20200528132354514](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132354514.png)
 
-![image-20200528132027310](https://github.com/1392517138/imgRepository/blob/master/image-20200528132027310.png)
+![image-20200528132027310](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132027310.png)
 
 现在将'-'改为'+'
 
-![image-20200528132057352](https://github.com/1392517138/imgRepository/blob/master/image-20200528132057352.png)
+![image-20200528132057352](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132057352.png)
 
-![image-20200528132331881](https://github.com/1392517138/imgRepository/blob/master/image-20200528132331881.png)
+![image-20200528132331881](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132331881.png)
 
 执行速度更快一些
 
 2.将堆空间大小变小，此时会进行GC。我们再在没有开启逃逸分析的情况下：
 
-![image-20200528132832045](https://github.com/1392517138/imgRepository/blob/master/image-20200528132832045.png)
+![image-20200528132832045](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132832045.png)
 
 2.1
 
-![image-20200528132807467](https://github.com/1392517138/imgRepository/blob/master/image-20200528132807467.png)
+![image-20200528132807467](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132807467.png)
 
 执行了GC
 
 2.2 现开启逃逸分析
 
-![image-20200528132857990](https://github.com/1392517138/imgRepository/blob/master/image-20200528132857990.png)
+![image-20200528132857990](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132857990.png)
 
-![image-20200528132921701](https://github.com/1392517138/imgRepository/blob/master/image-20200528132921701.png)
+![image-20200528132921701](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528132921701.png)
 
 发现不仅时间变短了，也根本没有发生GC。因为栈中没有GC
 
@@ -667,41 +667,41 @@ new 的这个V对象没有发生逃逸，就放在栈上
 ●线程同步的代价是相当高的，同步的后果是降低并发性和性能。
 ●在动态编译同步块的时候，JIT编译器可以借助逃逸分析来**判断同步块所使用的锁对象是否只能够被一个线程访问而没有被发布到其他线程。**如果没有，那么JIT编译器在编译这个同步块的时候就会取消对这部分代码的同步。这样就能大大提高并发性和性能。这个取消同步的过程就叫同步省略，也**叫锁消除。**
 
-![image-20200528133246945](https://github.com/1392517138/imgRepository/blob/master/image-20200528133246945.png)
+![image-20200528133246945](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528133246945.png)
 
-![image-20200528134535753](https://github.com/1392517138/imgRepository/blob/master/image-20200528134535753.png)
+![image-20200528134535753](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528134535753.png)
 
 字节码中仍然有，但是运行的时候会去掉
 
 **三、分离对象或标量替换**
 
-![image-20200528134718963](https://github.com/1392517138/imgRepository/blob/master/image-20200528134718963.png)
+![image-20200528134718963](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528134718963.png)
 
-![image-20200528134905654](https://github.com/1392517138/imgRepository/blob/master/image-20200528134905654.png)
+![image-20200528134905654](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528134905654.png)
 **标量替换参数设置:**
 参数-XX: +EliminateAllocations:开启了标量替换(默认打开)，允许将对象打散分配在栈上。
 
 1.先关闭
 
-![image-20200528135425822](https://github.com/1392517138/imgRepository/blob/master/image-20200528135425822.png)
+![image-20200528135425822](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528135425822.png)
 
-![image-20200528135744469](https://github.com/1392517138/imgRepository/blob/master/image-20200528135744469.png)
+![image-20200528135744469](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528135744469.png)
 
-![image-20200528135554838](https://github.com/1392517138/imgRepository/blob/master/image-20200528135554838.png)
+![image-20200528135554838](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528135554838.png)
 
 28ms,进行了一些GC
 
 2.开启后
 
-![image-20200528135707976](https://github.com/1392517138/imgRepository/blob/master/image-20200528135707976.png)
+![image-20200528135707976](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528135707976.png)
 
 明显降低，也没有GC
 
 #### 代码优化及堆堆小结
 
-![image-20200528140017034](https://github.com/1392517138/imgRepository/blob/master/image-20200528140017034.png)
+![image-20200528140017034](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528140017034.png)
 
-![image-20200528140117076](https://github.com/1392517138/imgRepository/blob/master/image-20200528140117076.png)
+![image-20200528140117076](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200528140117076.png)
 
 - 关于逃逸分析的论文在1999年就已经发表了，但直到JDK 1.6才有实现，而且这项技术到如今也并不是十分成熟的。
 - 其根本原因就是**无法保证逃逸分析的性能消耗一定能高于他的消耗。虽然经过逃逸分析可以做标量替换、栈上分配、和锁消除。但是逃逸分析自身也是需要进行一系列复杂的分析的，这其实也是一个相对耗时的过程。**
