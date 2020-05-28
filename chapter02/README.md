@@ -363,7 +363,9 @@ class文件时，Java虚拟机采用的是**双亲委派模式**，即把请求�
 
 [静态代码块执行顺序](https://blog.csdn.net/qq_35868412/article/details/89360250)
 
-<!--静态代码块在第三个阶段（初始化）被调用，把静态代码块，静态变量显示赋值放在<clinit>中-->
+
+静态代码块在第三个阶段（初始化）被调用，把静态代码块，静态变量显示赋值放在<clinit>中
+
 
 ![image-20200502105349223](https://cdn.jsdelivr.net/gh/1392517138/imgRepository@master/image-20200502105349223.png)
 
@@ -421,13 +423,17 @@ java. lang. SecurityException:Prohibited package name: java.lang
 #### 其他补充内容
 
 ●在JVM中表示两个class对象是否为同一个类存在两个必要条件:
-➢类的完整类名必须一致， 包括包名。<!--前面javapp.langpp.String已说明-->
-➢加载这个类的ClassLoader (指ClassLoader实例对象)必须相同。<!--例如自定义的为AppClassLoader,核心中的String为Bootstrap ClassLoader,前面例子也说明了,跟上一个例子相同-->
+➢类的完整类名必须一致， 包括包名。
+前面javapp.langpp.String已说明
+
+➢加载这个类的ClassLoader (指ClassLoader实例对象)必须相同。
+例如自定义的为AppClassLoader,核心中的String为Bootstrap ClassLoader,前面例子也说明了,跟上一个例子相同
 ●换句话说，在JVM中，即使这两个类对象(class对象)来源同一个Class文件，被同一个虚拟机所加载，但只要加载它们的ClassLoader实例对象不同，那么这两个类对象也是不相等的。
 
 #### **对类加载器的引用**
 
-JVM必须知道一个类型是由启动加载器加载的还是由用户类加载器加载的。如果一个类型是由用户类加载器加载的，**那么JVM会将这个类加载器的一个引用作为类型信息的一部分保存在方法区中**。当解析一个类型到另一个类型的引用的时候，JVM需要保证这两个类型的类加载器是相同的<!--后面学习到动态链接再解释-->。
+JVM必须知道一个类型是由启动加载器加载的还是由用户类加载器加载的。如果一个类型是由用户类加载器加载的，**那么JVM会将这个类加载器的一个引用作为类型信息的一部分保存在方法区中**。当解析一个类型到另一个类型的引用的时候，JVM需要保证这两个类型的类加载器是相同的
+后面学习到动态链接再解释。
 
 #### **类的主动使用和被动使用**
 
@@ -437,7 +443,8 @@ Java程序对类的使用方式分为:主动使用和被动使用。
 ➢访问某个类或接口的静态变量，或者对该静态变量赋值
 ➢调用类的静态方法
 ➢反射(比如: Class . forName ("top. p3wj. java.StringTest") ) 
-➢初始化一个类的子类 <!--它的父类也会被初始化-->
+➢初始化一个类的子类 
+它的父类也会被初始化
 ➢Java虚拟机启动时被标明为启动类的类
 ➢JDK 7开始提供的动态语言支持:
 java. lang. invoke . MethodHandle实例的解析结果REF_getStatic、 REF_putStatic、 REF_invokeStatic句柄对应的类没有初始化，则初始化
